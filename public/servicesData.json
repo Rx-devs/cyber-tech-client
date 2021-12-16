@@ -1,0 +1,38 @@
+[
+    {
+      "name": "Application Security",
+      "img": "",
+      "icon": "https://i.postimg.cc/DynzxvHQ/service-icon-1.png",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+    },
+    {
+      "name": "Cloud Security",
+      "img": "",
+      "icon": "https://i.postimg.cc/DynzxvHQ/service-icon-1.png",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+    },
+    {
+      "name": "Infrastructure Security",
+      "img": "",
+      "icon": "https://i.postimg.cc/DynzxvHQ/service-icon-1.png",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+    },
+    {
+      "name": "Threat Hunter",
+      "img": "",
+      "icon": "https://i.postimg.cc/DynzxvHQ/service-icon-1.png",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+    },
+    {
+      "name": "Disaster Planning",
+      "img": "",
+      "icon": "https://i.postimg.cc/DynzxvHQ/service-icon-1.png",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+    },
+    {
+      "name": "Incident Responder",
+      "img": "",
+      "icon": "https://i.postimg.cc/DynzxvHQ/service-icon-1.png",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
+    }
+  ]
