@@ -1,21 +1,26 @@
 import { Container, Grid } from "@mui/material";
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchServices } from "../../../redux/slices/serviceSlice";
+import Service from "../../../Shared/Service/Service";
 import './Services.css';
 
 const Services = () => {
-    const [services, setServices] = useState([]);
+    const dispatch = useDispatch();
+    const services = useSelector((state) => state.services.services);
+
     useEffect(() => {
-        fetch('./servicesData.json')
+        dispatch(fetchServices());
+    }, [dispatch]);
+    /* const [services, setServices] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/services/')
             .then(res => res.json())
             .then(data => setServices(data))
         
-    }, []);
+    }, []); */
     return (
         <div>
             <Container>
@@ -28,29 +33,11 @@ const Services = () => {
                         blanditiis tenetur
                     </Typography>
                 </Box>
-                <Grid container>
+                <Grid container spacing={2}>
                     {
-                        services.map(service => <Grid
+                        services.map(service => <Service
                             service={service}
-                            item xs={12} md={4}>
-                            <Card className="cardStyle" sx={{ minWidth: 275 }}>
-                                <CardContent>
-                                    <Box className="iconStyle">
-                                        <img width="30px" src={service.icon} alt="" />
-                                    </Box>
-                                    <Typography variant="h6" component="div">
-                                        {service.name}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        {service.details}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small">Read More</Button>
-                                </CardActions>
-                            </Card>
-
-                        </Grid>)
+                        ></Service>)
                     }
                     
                 </Grid>
