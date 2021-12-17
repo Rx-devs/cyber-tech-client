@@ -12,10 +12,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const ResponsiveAppBar = () => {
+const Navbar = () => {
+  const { user, logOut } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -76,12 +78,21 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-            <MenuItem onClick={handleCloseNavMenu}>
-            <Link to="/register">Register</Link>
-                </MenuItem>
-            <MenuItem onClick={handleCloseNavMenu}>
-            <Link to="/login">Login</Link>
-                </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/register">Register</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="/dashboard">Dashboard</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+              {   user.email ?
+                            <Button onClick={logOut} variant="contained">LogOut</Button>
+                            :
+                            <Link style={{ textDecoration: 'none' }} to="/login">
+                                <Button variant="contained">Login</Button>
+                            </Link>
+                        }
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -95,17 +106,24 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             
             <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to="/register">Register</Link>
-              </Button>
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link to="/register">Register</Link>
+            </Button>
             <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to="/login">Login</Link>
-              </Button>
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+            {   user.email ?
+                            <Button onClick={logOut} variant="contained">LogOut</Button>
+                            :
+                            <Link style={{ textDecoration: 'none' }} to="/login">
+                                <Button variant="contained">Login</Button>
+                            </Link>
+                        }
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -142,4 +160,4 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default Navbar;

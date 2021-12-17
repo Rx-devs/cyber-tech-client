@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, getIdToken, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 import initializeFirebaseAuth from "../Pages/Authentication/Firebase/Firebase.init";
 
@@ -9,7 +9,8 @@ const useFirebaseAuth = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
     const [loading, setLoading] = useState(true);
-    // const [admin, setAdmin] = useState(false);
+    const [admin, setAdmin] = useState(false);
+    const [token, setToken] = useState('');
     const auth = getAuth();
 
     // register new user
@@ -25,7 +26,7 @@ const useFirebaseAuth = () => {
                 setUser(newUser);
 
                 // save user to db 
-                // saveUserToDB(email, name, 'POST');
+                saveUserToDB(email, name, 'POST');
 
                 // send name to firebase
                 updateProfile(auth.currentUser, {
@@ -67,7 +68,7 @@ const useFirebaseAuth = () => {
             .then((result) => {
                 const user = result.user;
                 // save to db
-                // saveUserToDB(user.email, user.displayName, 'PUT');
+                saveUserToDB(user.email, user.displayName, 'PUT');
                 setAuthError('');
                 const destination = location?.state?.from || '/';
                 navigate(destination);
@@ -83,6 +84,10 @@ const useFirebaseAuth = () => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+                getIdToken(user)
+                    .then(idToken => {
+                        setToken(idToken);
+                })
             }
             else {
                 // user is signed out
@@ -93,11 +98,11 @@ const useFirebaseAuth = () => {
         return () => unsubscribe;
     }, [auth]);
 
-    /* useEffect(() => {
-        fetch(`https://intense-chamber-05246.herokuapp.com/users/${user.email}`)
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
-    },[user.email]) */
+    }, [user.email]);
     
     // User Log Out
     const logOut = () => {
@@ -110,9 +115,9 @@ const useFirebaseAuth = () => {
     }
 
     // send user data to database
-    /* const saveUserToDB = (email, displayName, method) => {
+    const saveUserToDB = (email, displayName, method) => {
         const user = { email, displayName };
-        fetch(`https://intense-chamber-05246.herokuapp.com/users`, {
+        fetch(`http://localhost:5000/users`, {
             method: method,
             headers: {
                 'content-type':'application/json'
@@ -120,9 +125,11 @@ const useFirebaseAuth = () => {
             body: JSON.stringify(user)  
         })
         .then()
-    } */
+    }
     return {
         user,
+        admin,
+        token,
         registerUser,
         logInUser,
         signInWithGoogle,
