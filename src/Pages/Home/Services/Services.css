@@ -1,13 +1,3 @@
-.cardStyle{
-    border-radius: 0;
-    box-shadow: none;
-    border-bottom: 1px solid #fff;
-    margin-bottom: 20px;
-}
-
-.cardStyle:hover{
-    border-bottom: 2.58px solid #ed1d61;
-}
 .iconStyle{
     background:linear-gradient(to bottom, #ed1e79, #f10e66, #f20452, #f10c3e, #ed1c27);
     height: 60px;

@@ -11,10 +11,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -36,19 +35,29 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  // navlink styles
+  const customStyle = {
+    textDecoration: "none",color:"#000000", display:"block", textTransform: "capitalize",fontSize:"16px"
+  };
+  const activeStyle = {
+    ...customStyle, color:'red',
+  };
+
   return (
-    <AppBar position="static">
+    <AppBar sx={{ px: 6, py: 0, background: 'transparent', boxShadow: 'none' }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Large Device Logo*/}
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ fontWeight:"700", color: "#f10e66", mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            CyberTECH
           </Typography>
 
+          {/* Small Device */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -58,7 +67,7 @@ const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: '#000' }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -79,54 +88,102 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/register">Register</Link>
+                <NavLink
+                to="/home"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Home
+              </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/dashboard">Dashboard</Link>
+                <NavLink
+                to="/dashboard"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Dashboard
+              </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-              {   user.email ?
-                            <Button onClick={logOut} variant="contained">LogOut</Button>
-                            :
-                            <Link style={{ textDecoration: 'none' }} to="/login">
-                                <Button variant="contained">Login</Button>
-                            </Link>
-                        }
+                {user.email ?
+                  <Button onClick={logOut} variant="contained">LogOut</Button>
+                  :
+                  <NavLink
+               to="/login"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Login
+              </NavLink>
+                }
               </MenuItem>
             </Menu>
           </Box>
+
+          {/* Small Device Logo*/}
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            sx={{fontWeight:"700", color: "#f10e66", flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            CyberTECH
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              <Link to="/register">Register</Link>
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              <Link to="/dashboard">Dashboard</Link>
-            </Button>
-            {   user.email ?
-                            <Button onClick={logOut} variant="contained">LogOut</Button>
-                            :
-                            <Link style={{ textDecoration: 'none' }} to="/login">
-                                <Button variant="contained">Login</Button>
-                            </Link>
-                        }
-          </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/* Large Device */}
+          <Box onClick={handleCloseNavMenu} sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Button>
+              <NavLink
+                to="/home"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Home
+              </NavLink>
+            </Button>
+            <Button>
+              <NavLink
+                to="/register"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Register
+              </NavLink>
+            </Button>
+            <Button>
+              <NavLink
+                to="/dashboard"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Dashboard
+              </NavLink>
+            </Button>
+            {user.email ?
+              <Button onClick={logOut} variant="contained" sx={{backgroundColor:'#ed1d61'}}>LogOut</Button>
+              :
+              <Button>
+              <NavLink
+               to="/login"
+                style={({ isActive }) =>
+              isActive ? activeStyle : customStyle
+            }>
+                Login
+              </NavLink>
+            </Button>
+            }
+          </Box>
+			
+          <Box sx={{ flexGrow: 0, display:'flex', alignItems:'center' }}>
+			  {user.email && <Typography
+			  sx={{color:'#000000', mx:3}}
+            variant="subtitle1"
+          >
+		  Hi, {user?.displayName}
+			  </Typography>}
+		  <Avatar alt="Remy Sharp" src={user?.photoURL} />
+		  {/*
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -154,7 +211,9 @@ const Navbar = () => {
                 </MenuItem>
               ))}
             </Menu>
+			*/}
           </Box>
+		  
         </Toolbar>
       </Container>
     </AppBar>

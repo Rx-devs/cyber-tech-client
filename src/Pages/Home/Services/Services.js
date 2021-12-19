@@ -16,21 +16,20 @@ const Services = () => {
     }, [dispatch]);
     /* const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/services/')
+        fetch('https://young-castle-89002.herokuapp.com/services/')
             .then(res => res.json())
             .then(data => setServices(data))
         
     }, []); */
     return (
         <div>
-            <Container>
+            <Container sx={{py:4}}>
                 <Box sx={{ textAlign: 'center', p: 4 }}>
-                    <Typography variant="h5" gutterBottom component="div">
+                    <Typography variant="h4" gutterBottom component="div">
                         We Offer Professional Security Solutions
                     </Typography>
-                    <Typography variant="subtitle2" gutterBottom component="div">
-                        subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-                        blanditiis tenetur
+                    <Typography variant="subtitle1" gutterBottom component="div">
+                        Providing the best services.
                     </Typography>
                 </Box>
                 <Grid container spacing={2}>

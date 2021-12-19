@@ -11,9 +11,9 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
-/* import MyOrders from '../User/MyOrders/MyOrders/MyOrders';
+import MyOrders from '../User/MyOrders/MyOrders/MyOrders';
 import Pay from '../User/Pay/Pay';
-import Review from '../User/Review/Review'; */
+import Review from '../User/Review/Review';
 
 // dashboard drawer
 const drawerWidth = 200;
@@ -36,23 +36,23 @@ function Dashboard(props) {
                     </ListItemText>
                 </ListItem>
                 <Divider />
-                {/* <ListItem  button >
+                <ListItem  button >
                     <ListItemText>
-                        <Link  to={`${url}/pay`}>Pay</Link>
+                        <Link  to={`/dashboard/pay`}>Pay</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`${url}`}>My Orders</Link>
+                        <Link  to={`/dashboard/`}>My Orders</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`${url}/review`}>Review</Link>
+                        <Link  to={`/dashboard/review`}>Review</Link>
                     </ListItemText>
-                </ListItem> */}
+                </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
@@ -166,17 +166,6 @@ function Dashboard(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                {/* {!admin && <Routes>
-                    <Route exact path={path}>
-                        <MyOrders></MyOrders>
-                    </Route>
-                    <Route path={`${path}/pay`}>
-                        <Pay></Pay>
-                    </Route>
-                    <Route path={`${path}/review`}>
-                        <Review></Review>
-                    </Route>
-                </Routes>} */}
                     <Outlet/>
             </Box>
         </Box>
