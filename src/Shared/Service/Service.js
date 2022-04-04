@@ -21,7 +21,7 @@ const Service = ({service}) => {
                             {name}
                         </Typography>
                         <Typography variant="body2">
-                            {details}
+                            {details.slice(0,300)} ...
                         </Typography>
                     </CardContent>
                     <CardActions>

@@ -1,11 +1,9 @@
 import { Button, Modal, Typography } from "@mui/material";
 import { Box } from '@mui/system';
 import React from "react";
-import useCustomStyles from "../../../../../Hooks/useCustomStyles";
 
 const OrderCancelModal = ({orders,setOrders,openCancellation,setOpenCancellation,handleCancellationClose}) => {
-    const { modalStyle } = useCustomStyles();
-
+    
     // order cancel handlers
     const handleOrderCancel = id => {
         fetch(`https://intense-chamber-05246.herokuapp.com/orders/${id}`, {
@@ -31,7 +29,7 @@ const OrderCancelModal = ({orders,setOrders,openCancellation,setOpenCancellation
                 onClose={handleCancellationClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
-                <Box sx={modalStyle}>
+                <Box>
                     <Typography sx={{ mb: 3 }} id="modal-modal-title" variant="h6" component="h2">
                         Do you want to cancel the order?
                     </Typography>

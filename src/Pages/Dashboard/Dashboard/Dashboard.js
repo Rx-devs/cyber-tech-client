@@ -11,16 +11,18 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
-import MyOrders from '../User/MyOrders/MyOrders/MyOrders';
-import Pay from '../User/Pay/Pay';
-import Review from '../User/Review/Review';
+
+const linkStyle={
+	textDecoration: 'none', color:'#000000', fontWeight:'500'
+}
+// #ed1e79, #f10e66, #f20452, #f10c3e, #ed1c27
 
 // dashboard drawer
 const drawerWidth = 200;
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { logOut, admin } = useAuth();
+    const { logOut, admin, user } = useAuth();
     
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -32,69 +34,73 @@ function Dashboard(props) {
             {!admin && <List>
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to="/">Home</Link>
+						<Link style={linkStyle} to="/">
+								Home
+						</Link>
+					</ListItemText>
+                </ListItem>
+                <Divider />
+                <ListItem  button >
+                    <ListItemText>
+                        <Link style={linkStyle} to={`/dashboard/pay`}>Pay</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard/pay`}>Pay</Link>
+                        <Link style={linkStyle} to={`/dashboard/myOrders`}>My Orders</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard/`}>My Orders</Link>
+                        <Link style={linkStyle} to={`/dashboard/review`}>Review</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard/review`}>Review</Link>
-                    </ListItemText>
-                </ListItem>
-                <Divider />
-                <ListItem  button >
-                    <ListItemText>
-                    <Button onClick={logOut} variant="contained">LogOut</Button>
+                    <Button sx={{backgroundColor:'#ed1c27'}} onClick={logOut} variant="contained">LogOut</Button>
                     </ListItemText>
                 </ListItem>
                 <Divider />
             </List>}
             {admin && <List>
                 <ListItem  button >
+					<ListItemText>
+						<Link style={linkStyle} to="/">
+								Home
+						</Link>
+					</ListItemText>
+                </ListItem>
+                <Divider />
+                <ListItem  button >
                     <ListItemText>
-                        <Link  to="/">Home</Link>
+                        <Link style={linkStyle} to={`/dashboard/manageAllOrders`}>Manage All Orders</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard`}>Manage All Orders</Link>
+                        <Link style={linkStyle} to={`/dashboard/addService`}>Add A Service</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard/addService`}>Add A Service</Link>
+                        <Link style={linkStyle} to={`/dashboard/makeAdmin`}>Make Admin</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard/makeAdmin`}>Make Admin</Link>
+                        <Link style={linkStyle} to={`/dashboard/manageServices`}>Manage All Services</Link>
                     </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem  button >
                     <ListItemText>
-                        <Link  to={`/dashboard/manageServices`}>Manage All Services</Link>
-                    </ListItemText>
-                </ListItem>
-                <Divider />
-                <ListItem  button >
-                    <ListItemText>
-                    <Button onClick={logOut} variant="contained">LogOut</Button>
+                    <Button sx={{backgroundColor:'#ed1c27'}} onClick={logOut} variant="contained">LogOut</Button>
                     </ListItemText>
                 </ListItem>
                 <Divider />
@@ -111,7 +117,7 @@ function Dashboard(props) {
                 position="fixed"
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    ml: { sm: `${drawerWidth}px` }, background: '#f10e66'
                 }}
             >
                 <Toolbar>
@@ -166,6 +172,14 @@ function Dashboard(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
+				<Box sx={{p:5}} >
+					<Typography variant="h4" gutterBottom component="div">
+						Welcome to Your Dashboard
+					  </Typography>
+					<Typography variant="h5" gutterBottom component="div">
+						{ user.displayName }
+					  </Typography>
+				</Box>
                     <Outlet/>
             </Box>
         </Box>
