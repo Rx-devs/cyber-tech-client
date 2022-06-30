@@ -24,7 +24,8 @@
     "react-scripts": "5.0.0",
     "redux-devtools-extension": "^2.13.9",
     "web-vitals": "^2.1.0",
-	"protobufjs": ">=6.11.3"
+	"protobufjs": "^6.11.3",
+	"ejs": "^3.1.7"
   },
   "scripts": {
     "start": "react-scripts start",
